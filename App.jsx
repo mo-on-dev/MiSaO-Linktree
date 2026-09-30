@@ -21,6 +21,7 @@ import {
   FiX,
   FiMoon,
   FiSun,
+  FiLock,
 } from "react-icons/fi";
 
 import logo from "./assets/logo_animado.webm";
@@ -41,7 +42,7 @@ const socials = [
     description: "¡Sígueme!",
     icon: FaXTwitter,
     url: "https://x.com/misaovtuber",
-    accent: "#000000",
+    accent: "#d8d0ef",
   },
   {
     name: "TikTok",
@@ -81,7 +82,7 @@ const socials = [
     description: "¡Ven a verme en vivo!",
     icon: FaTwitch,
     url: "https://www.twitch.tv/misaovtuber",
-    accent: "#6441a4",
+    accent: "#9146ff",
   },
 ];
 
@@ -120,6 +121,10 @@ function SocialCard({ social, index }) {
     >
       <div className="social-card-glow" />
 
+      <span className="social-card-user">
+        {social.username}
+      </span>
+
       <div className="social-card-icon">
         <Icon />
       </div>
@@ -132,10 +137,6 @@ function SocialCard({ social, index }) {
       <div className="social-card-arrow">
         <FiArrowUpRight />
       </div>
-
-      <span className="social-card-user">
-        {social.username}
-      </span>
     </a>
   );
 }
@@ -166,7 +167,9 @@ function Sidebar() {
 
               <Icon />
 
-              <span>{item.label}</span>
+              <span>
+                {item.label}
+              </span>
             </a>
           );
         })}
@@ -188,11 +191,13 @@ function Sidebar() {
 
 function TerminalPanel() {
   return (
-    <div className="terminal-panel">
+    <div className="terminal-panel terminal-error">
       <div className="terminal-header">
         <FiTerminal />
 
-        <span>MISAO.exe</span>
+        <span>
+          MISAO.exe
+        </span>
 
         <div className="terminal-dots">
           <i />
@@ -203,19 +208,33 @@ function TerminalPanel() {
 
       <div className="terminal-content">
         <p>
-          <span>&gt;</span> Loading data...
+          <span>&gt;</span>
+          {" "}Loading operator data...
         </p>
 
         <p>
-          <span>&gt;</span> Connecting to server...
+          <span>&gt;</span>
+          {" "}Connecting to MODEL_V2...
         </p>
 
-        <p>
-          <span>&gt;</span> Initialize variables...
+        <p className="terminal-warning">
+          <span>&gt;</span>
+          {" "}WARNING: encrypted data detected
         </p>
 
-        <p className="terminal-highlight">
-          <span>&gt;</span> Bienvenido ♥
+        <p className="terminal-error-line">
+          <span>&gt;</span>
+          {" "}ERROR: failed to load operator profile
+        </p>
+
+        <p className="terminal-error-line">
+          <span>&gt;</span>
+          {" "}ACCESS_DENIED
+        </p>
+
+        <p className="terminal-offline-line">
+          <span>&gt;</span>
+          {" "}SYSTEM OFFLINE_
         </p>
 
         <div className="terminal-cursor" />
@@ -226,21 +245,24 @@ function TerminalPanel() {
 
 
 /* ============================================================
-   PROFILE
+   PROFILE CENSURADO
 ============================================================ */
 
 function ProfileCard() {
   return (
     <section
-      className="profile-card"
+      className="profile-card censored-profile"
       id="about"
     >
+      {/* AVATAR */}
+
       <div className="profile-avatar">
-        <div className="avatar-ring">
-          <div className="avatar-core">
+        <div className="avatar-ring censored-avatar-ring">
+          <div className="avatar-core censored-avatar">
             <img
               src={profile1}
-              alt="MiSao VT"
+              alt=""
+              aria-hidden="true"
               className="avatar-image avatar-image-default"
             />
 
@@ -250,60 +272,90 @@ function ProfileCard() {
               aria-hidden="true"
               className="avatar-image avatar-image-hover"
             />
+
+            <div className="avatar-censor-grid" />
+
+            <div className="avatar-censor-bar censor-bar-1">
+              REDACTED
+            </div>
+
+            <div className="avatar-censor-bar censor-bar-2">
+              █████████
+            </div>
+
+            <div className="avatar-scanline" />
           </div>
         </div>
 
-        <div className="online-pill">
+        <div className="online-pill offline-pill">
           <span />
-          ONLINE
+          OFFLINE
         </div>
       </div>
 
 
-      <div className="profile-content">
+      {/* INFORMACIÓN */}
+
+      <div className="profile-content censored-content">
         <div className="profile-heading">
           <div>
             <span className="profile-label">
               // OPERATOR_PROFILE
             </span>
 
-            <h1>
-              MiSaO VTuber
+            <h1 className="redacted-title">
+              ██████ ██████
               <b>✦</b>
             </h1>
           </div>
         </div>
 
-        <p className="profile-role">
-          Avatar Virtual
+        <div className="profile-role redacted-role">
+          <span className="redacted-text">
+            ███████████
+          </span>
 
           <i>✦</i>
 
-          Gaming
+          <span className="redacted-text">
+            ███████
+          </span>
 
           <i>✦</i>
 
-          Creador de Contenido
-        </p>
+          <span className="redacted-text">
+            ███████████████
+          </span>
+        </div>
 
-        <p className="profile-description">
-          Sistema de vigilancia con acceso a internet. ♡
-          <br />
-          No se recomienda dejarlo sin supervisión.
-        </p>
+        <div className="classified-description">
+          <FiLock />
 
-        <div className="profile-tags">
-          <span>JUEGOS</span>
-          <span>TECNOLOGÍA</span>
-          <span>STREAMING</span>
-          <span>LIVE</span>
-          <span>SILLY</span>
+          <div>
+            <strong>
+              OPERATOR DATA CLASSIFIED
+            </strong>
+
+            <span>
+              No autorizado para visualizar esta información.
+            </span>
+          </div>
+        </div>
+
+        <div className="profile-tags classified-tags">
+          <span>[LOCKED]</span>
+          <span>[REDACTED]</span>
+          <span>[ENCRYPTED]</span>
+          <span>[UNKNOWN]</span>
+          <span>[???]</span>
         </div>
       </div>
 
 
+      {/* TRACKING */}
+
       <div
-        className="profile-decoration reticle-decoration"
+        className="profile-decoration reticle-decoration corrupted-reticle"
         aria-hidden="true"
       >
         <div className="reticle">
@@ -325,8 +377,19 @@ function ProfileCard() {
         </div>
 
         <span className="reticle-label">
-          TRACKING_ON
+          TRACKING_FAILED
         </span>
+      </div>
+
+
+      {/* CLASSIFIED */}
+
+      <div
+        className="classified-overlay-label"
+        aria-hidden="true"
+      >
+        <FiLock />
+        CLASSIFIED
       </div>
     </section>
   );
@@ -344,7 +407,9 @@ function App() {
     }
 
     const savedTheme =
-      window.localStorage.getItem("misao-theme");
+      window.localStorage.getItem(
+        "misao-theme"
+      );
 
     if (savedTheme === "dark") {
       return true;
@@ -369,26 +434,27 @@ function App() {
 
 
   return (
-        <main
-        className={`page ${
-            darkMode ? "dark-mode" : "light-mode"
-        }`}
-        style={{
-            "--background-pattern": `url(${
-            darkMode ? backgroundDark : backgroundLight
-            })`,
-        }}
-        >
+    <main
+      className={`page ${
+        darkMode
+          ? "dark-mode"
+          : "light-mode"
+      }`}
+      style={{
+        "--background-pattern": `url(${
+          darkMode
+            ? backgroundDark
+            : backgroundLight
+        })`,
+      }}
+    >
       <div className="background-effects" />
 
       <section
         className="app-window"
         id="home"
       >
-
-        {/* ====================================================
-            WINDOW HEADER
-        ==================================================== */}
+        {/* HEADER */}
 
         <header className="window-header">
           <div className="window-dots">
@@ -398,16 +464,18 @@ function App() {
           </div>
 
           <div className="window-title">
-            <strong>MISAO.exe</strong>
+            <strong>
+              MISAO.exe
+            </strong>
 
             <span>/</span>
 
-            <span>Mis redes</span>
+            <span>
+              Mis redes
+            </span>
           </div>
 
-
           <div className="window-actions">
-
             <button
               type="button"
               className="theme-toggle"
@@ -434,14 +502,12 @@ function App() {
               )}
             </button>
 
-
             <button
               type="button"
               aria-label="Minimize"
             >
               <FiMinus />
             </button>
-
 
             <button
               type="button"
@@ -450,7 +516,6 @@ function App() {
               <FiSquare />
             </button>
 
-
             <button
               type="button"
               aria-label="Close"
@@ -458,23 +523,18 @@ function App() {
             >
               <FiX />
             </button>
-
           </div>
         </header>
 
 
-        {/* ====================================================
-            APP BODY
-        ==================================================== */}
+        {/* BODY */}
 
         <div className="app-body">
           <Sidebar />
 
           <div className="dashboard">
 
-            {/* ==================================================
-                HERO
-            ================================================== */}
+            {/* HERO */}
 
             <section className="hero">
               <div className="hero-grid" />
@@ -491,7 +551,6 @@ function App() {
                 ✦
               </div>
 
-
               <div className="hero-logo">
                 <video
                   autoPlay
@@ -506,11 +565,15 @@ function App() {
                 </video>
 
                 <div className="hero-tagline">
-                  <span>AVATAR VIRTUAL</span>
+                  <span>
+                    AVATAR VIRTUAL
+                  </span>
 
                   <b>✦</b>
 
-                  <span>GAMING</span>
+                  <span>
+                    GAMING
+                  </span>
 
                   <b>✦</b>
 
@@ -520,21 +583,16 @@ function App() {
                 </div>
               </div>
 
-
               <TerminalPanel />
             </section>
 
 
-            {/* ==================================================
-                PROFILE
-            ================================================== */}
+            {/* PROFILE */}
 
             <ProfileCard />
 
 
-            {/* ==================================================
-                SOCIAL NETWORKS
-            ================================================== */}
+            {/* REDES */}
 
             <section
               className="links-section"
@@ -551,13 +609,11 @@ function App() {
                   </h2>
                 </div>
 
-
                 <span className="connection-status">
                   <i />
                   LINK ESTABLISHED
                 </span>
               </div>
-
 
               <div className="social-grid">
                 {socials.map(
@@ -573,9 +629,7 @@ function App() {
             </section>
 
 
-            {/* ==================================================
-                FOOTER
-            ================================================== */}
+            {/* FOOTER */}
 
             <footer className="footer">
               <span>
@@ -586,11 +640,10 @@ function App() {
                 BUILT WITH ♡ + CAFFEINE // MoonDev
               </span>
 
-              <span>
-                STATUS: ONLINE
+              <span className="footer-offline">
+                STATUS: OFFLINE
               </span>
             </footer>
-
           </div>
         </div>
       </section>
